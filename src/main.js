@@ -3,7 +3,7 @@ import App from './App'
 import components from '@/components/UI'
 
 console.log(components)
-const app = createApp (App);
+const app = createApp (App)
 
 components.forEach (component => {
     app.component (component.name, component);
@@ -11,3 +11,4 @@ components.forEach (component => {
 
 
 app.mount ('#app')
+

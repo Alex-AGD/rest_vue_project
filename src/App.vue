@@ -1,48 +1,56 @@
 <template>
-  <div class="app">
-      <messages-list
-          :posts="posts"
-      />
-      <messages-from
-          @create="createPost"
-      />
+  <div id="nav">
+    <div><h3>Лёха учит Vuejs!</h3></div>
+    <hr>
+    <ListUser v-bind:list="listPost"
+              v-on:remove="removePost"
+    />
   </div>
 </template>
 
 <script>
+import ListUser from "@/components/ListUser";
+
 export default {
-  components:{
-    MessagesFrom,
-    MessagesList
-  },
-  data () {
+  name: 'app',
+  data() {
     return {
-      posts: [
-        { id: 1, title: 'JsTop', body: 'Js топчик' },
-        { id: 2, title: 'JsTop 2', body: 'Описание 2' },
-        { id: 3, title: 'JsTop 3', body: 'Описание 3' },
-        { id: 4, title: 'JsTop 3', body: 'Описание 5' },
-      ],
+      listPost: [
+        {id: 1, firstName: 'Лёха: Фулл-стак синьёр, тим лид, биг-дата, архитектор ', lastName: 'Жака', completed: false},
+        {id: 2, firstName: 'Лёха: Фулл-стак синьёр, тим лид, биг-дата, архитектор ', lastName: 'Жака', completed: false},
+      ]
     }
   },
-  methods: {
-    createPost(posts){
-     this.posts.push(posts)
+  components: {
+    ListUser
+  },
+  methods:{
+    removePost(){
+
     }
   }
 }
-import MessagesFrom from "@/components/MessagesForms";
-import MessagesList from "@/components/MessagesList";
 </script>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-.app{
-  margin: 10px;
-  padding: 10px;
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
