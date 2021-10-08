@@ -1,15 +1,22 @@
 <template>
   <div id="nav">
-    <div><h3>Лёха учит Vuejs!</h3></div>
+    <div><h3>Лёха учит VueJs!</h3></div>
     <hr>
-    <ListUser v-bind:list="listPost"
-              v-on:remove="removePost"
+    <ListUser
+        v-if="listPost.length"
+        v-bind:list="listPost"
+        v-on:remove-user="removePost"
     />
+    <p v-else>Нету дел</p>
+    <AddNewPost
+        v-on:add-post="addPost"/>
   </div>
 </template>
 
 <script>
 import ListUser from "@/components/ListUser";
+import AddNewPost from "@/components/AddNewPost";
+import {messagesApi} from "@/api/api";
 
 export default {
   name: 'app',
@@ -22,13 +29,27 @@ export default {
     }
   },
   components: {
-    ListUser
+    ListUser,
+    AddNewPost
   },
-  methods:{
-    removePost(){
+  mounted() {
+    messagesApi.getAllPosts()
+        .then((res) => {
+          console.log(res.data)
+          //this.listPost = res.data
+        })
 
+  },
+  methods: {
+    removePost(id) {
+      this.listPost = this.listPost.filter(f => f.id !== id)
+    },
+    addPost(newPost) {
+      console.log(newPost)
+      this.listPost.push(newPost)
     }
-  }
+  },
+
 }
 </script>
 

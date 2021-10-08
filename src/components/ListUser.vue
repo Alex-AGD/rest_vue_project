@@ -2,8 +2,9 @@
   <div>
     <ul>
       <ListUserItem
-          v-for="listPerson of list"
-          v-bind:list="listPerson" list-person
+          v-for="(listPerson, i) of list"
+          v-bind:list="listPerson"
+          v-bind:index="i"
           v-on:remove-user="remove" />
     </ul>
   </div>
@@ -18,9 +19,13 @@ export default {
   components: {ListUserItem},
   methods:{
     remove(id) {
-      this.$emit('remove-by-id', id)
+      this.$emit('remove-user', id)
     }
+  },
+  mounted() {
+    console.log("ListUser")
   }
+
 }
 </script>
 

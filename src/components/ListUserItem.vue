@@ -3,9 +3,8 @@
     <span v-bind:class="{ checked:list.completed }">
       <input type="checkbox"
              v-on:change="list.completed = !list.completed">
-      <strong>{{ list.id }}</strong>
-      Имя : {{ list.firstName }}
-      <button v-on:click="$emit('remove-user', list.id)">&times;</button>
+      <strong>ID:{{index +1 }} </strong> Имя : {{ list.title }}
+      <button v-on:click="$emit('remove-user', list.id)">X</button>
     </span>
   </li>
 </template>
@@ -19,7 +18,8 @@ export default {
     list: {
       type: Object,
       required: true
-    }
+    },
+    index: Number
   }
 }
 </script>
@@ -35,6 +35,7 @@ export default {
 }
 
 button {
+  align-items: flex-end;
   background: #2c3e50;
   color: #42b983;
   border-radius: 30%;
