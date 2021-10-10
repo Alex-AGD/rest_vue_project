@@ -9,7 +9,7 @@ const instance = axios.create({
 
 export const messagesApi = {
     getAllPosts() {
-        return instance.get("todos")
+        return instance.get("todos?_limit=10")
     },
 
     getPostFromUserById() {

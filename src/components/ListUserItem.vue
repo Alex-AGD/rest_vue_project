@@ -1,9 +1,8 @@
 <template>
   <li class="li">
     <span v-bind:class="{ checked:list.completed }">
-      <input type="checkbox"
-             v-on:change="list.completed = !list.completed">
-      <strong>ID:{{index +1 }} </strong> Имя : {{ list.title }}
+      <input type="checkbox" v-on:change="list.completed = !list.completed">
+      <strong>ID:{{ index + 1 }} </strong> Сообщение : {{ list.title}}
       <button v-on:click="$emit('remove-user', list.id)">X</button>
     </span>
   </li>
@@ -20,7 +19,13 @@ export default {
       required: true
     },
     index: Number
+  },
+  filters: {
+    uppercase (value) {
+      return console.log(value)
+    }
   }
+
 }
 </script>
 
