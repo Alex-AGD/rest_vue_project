@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App'
 import components from '@/components/UI'
 import router from "@/router/router";
+import store from '@/store/store'
 
 
 //console.log(components)
@@ -12,4 +13,5 @@ components.forEach (component => {
 })
 
 app .use(router)
+    .use(store)
     .mount ('#app')

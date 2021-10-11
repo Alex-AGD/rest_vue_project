@@ -10,7 +10,7 @@
     <Loader v-if="loading"/>
     <ListUser
         v-else-if="filterNotes.length"
-        v-bind:list="filterNotes"
+        v-bind:listPost="filterNotes"
         v-on:remove-user="removePost"
     />
     <p v-else>Список сообщений пуст</p>
@@ -30,6 +30,8 @@ import AddNewPost from "@/components/AddNewPost";
 import { messagesApi } from "@/api/api";
 import Loader from "@/assets/Loader";
 
+
+import {mapGetters} from 'vuex'
 export default {
   name: 'app',
   data () {
@@ -52,9 +54,10 @@ export default {
   mounted () {
     messagesApi.getAllPosts ()
         .then ((res) => {
-          this.listPost = res.data
+          this.listPost = res.data;
           this.loading = false
         })
+    this.$store.dispatch('fetchAllPost')
   },
   computed: {
     filterNotes () {
@@ -68,8 +71,10 @@ export default {
       if (this.notes === 'not') {
         return this.listPost.filter (s => !s.completed);
       }
-    }
+    },
+      ...mapGetters(['allPosts'])
   },
+
   methods: {
     removePost (id) {
       this.listPost = this.listPost.filter (f => f.id !== id)

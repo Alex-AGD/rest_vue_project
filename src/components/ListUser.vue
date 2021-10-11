@@ -2,7 +2,7 @@
   <div>
     <ul>
       <ListUserItem
-          v-for="(listPerson, i) of list"
+          v-for="(listPerson, i) of listPost"
           v-bind:list="listPerson"
           v-bind:index="i"
           v-on:remove-user="remove"/>
@@ -15,7 +15,7 @@ import ListUserItem from "@/components/ListUserItem";
 
 export default {
   name: "ListUser",
-  props: [ 'list' ],
+  props: [ 'listPost' ],
   components: { ListUserItem },
   methods: {
     remove (id) {
