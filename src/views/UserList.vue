@@ -27,16 +27,15 @@
 <script>
 import ListUser from "@/components/ListUser";
 import AddNewPost from "@/components/AddNewPost";
-import { messagesApi } from "@/api/api";
 import Loader from "@/assets/Loader";
 
 
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'app',
   data () {
     return {
-      listPost: [],
       loading: true,
       notes: "all"
     }
@@ -52,27 +51,22 @@ export default {
     Loader
   },
   mounted () {
-    messagesApi.getAllPosts ()
-        .then ((res) => {
-          this.listPost = res.data;
-          this.loading = false
-        })
-    this.$store.dispatch('fetchAllPost')
+    this.$store.dispatch ('fetchAllPost')
   },
   computed: {
+    ...mapGetters ([ 'allPosts' ]),
     filterNotes () {
       if (this.notes === 'all') {
-        return this.listPost;
+        return this.allPosts;
       }
       if (this.notes === 'completed') {
-        return this.listPost.filter (s => s.completed);
+        return this.allPosts.filter (s => s.completed);
       }
 
       if (this.notes === 'not') {
-        return this.listPost.filter (s => !s.completed);
+        return this.allPosts.filter (s => !s.completed);
       }
-    },
-      ...mapGetters(['allPosts'])
+    }
   },
 
   methods: {

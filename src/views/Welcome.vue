@@ -1,9 +1,11 @@
 <template>
- <h1>Добро пожаловать на страницу!</h1>
+  <h1>Добро пожаловать на страницу!</h1>
   <div>
+    <Loader v-if="loadingMessages"/>
     <ul>
-    <li v-for="post in allPosts">{{ post.title }}</li>
-
+      <li v-for="post of allMessages">
+        {{ post.id }} {{ post.message }}
+      </li>
     </ul>
     <router-link to="/">Назад</router-link>
   </div>
@@ -13,20 +15,28 @@
 import { mapGetters } from "vuex";
 import ListUserItem from "@/components/ListUserItem";
 
+import Loader from "@/assets/Loader";
+
 export default {
   name: "Welcome",
-  components: { ListUserItem },
-
+  data () {
+    return {
+      loading: false
+    }
+  },
+  components: {
+    ListUserItem,
+    Loader
+  },
   mounted () {
-    this.$store.dispatch('fetchAllPost')
-
+    this.$store.dispatch ('fetchAllMessages')
   },
-  methods:{
-
-  },
+  methods: {},
   computed: {
-    ...mapGetters(['allPosts'])
-  }
+    ...mapGetters ([ 'allMessages' ]),
+    ...mapGetters ([ 'loadingMessages' ])
+  },
+
 }
 </script>
 

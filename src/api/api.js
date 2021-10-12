@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com/',
+    baseURL: 'http://localhost:8081',
     headers: {
         "Content-type": "application/json"
     }
@@ -9,10 +9,14 @@ const instance = axios.create({
 
 export const messagesApi = {
     getAllPosts() {
-        return instance.get("todos?_limit=10")
+        return instance.get("todos?_limit=11")
     },
 
     getPostFromUserById() {
         return instance.get("/todos/1")
-}
+},
+    getAllMessages() {
+        return instance.get("/messages")
+    }
+
 }
