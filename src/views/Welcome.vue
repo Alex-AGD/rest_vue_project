@@ -33,8 +33,7 @@ export default {
   },
   methods: {},
   computed: {
-    ...mapGetters ([ 'allMessages' ]),
-    ...mapGetters ([ 'loadingMessages' ])
+    ...mapGetters ([ 'allMessages','loadingMessages'])
   },
 
 }
