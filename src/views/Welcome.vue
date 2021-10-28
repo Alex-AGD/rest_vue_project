@@ -2,38 +2,46 @@
   <h1>Добро пожаловать на страницу!</h1>
   <div>
     <Loader v-if="loadingMessages"/>
+    <h1>{{ postsCount }}</h1>
     <ul>
-      <li v-for="post of allMessages">
-        {{ post.id }} {{ post.message }}
+      <li v-for="(post, id) of validationMessage">
+        ID {{id + 1}}
+        Сообщение: {{post.message }}
       </li>
     </ul>
+    <MessageForm/>
+    <hr/>
     <router-link to="/">Назад</router-link>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapGetters, mapActions} from "vuex";
 import ListUserItem from "@/components/ListUserItem";
 
 import Loader from "@/assets/Loader";
+import MessageForm from "@/components/MessageForm";
 
 export default {
   name: "Welcome",
-  data () {
+  data() {
     return {
       loading: false
     }
   },
   components: {
     ListUserItem,
-    Loader
+    Loader,
+    MessageForm
   },
-  mounted () {
-    this.$store.dispatch ('fetchAllMessages')
+  mounted() {
+    //this.$store.dispatch ('allMessages')
+    this.fetchAllMessages(4)
   },
-  methods: {},
+  methods: mapActions(['fetchAllMessages']),
+
   computed: {
-    ...mapGetters ([ 'allMessages','loadingMessages'])
+    ...mapGetters(['validationMessage', 'loadingMessages', 'postsCount'])
   },
 
 }

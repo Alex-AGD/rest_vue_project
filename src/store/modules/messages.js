@@ -14,12 +14,15 @@ export default {
         },
         loading (state, loadingMessages) {
             state.loading = loadingMessages
+        },
+        createPost (state, newMessage) {
+            state.listMessages.push(newMessage)
         }
     },
 
     actions: {
-        fetchAllMessages (ctx) {
-            messagesApi.getAllMessages ()
+        fetchAllMessages (ctx, limit = 3) {
+            messagesApi.getAllMessages (limit)
                 .then ((res) => {
                     const resAll = res.data;
                     this.loading = false
@@ -35,6 +38,14 @@ export default {
         },
         loadingMessages (state) {
             return state.loading
+        },
+        postsCount (state, getters) {
+            return getters.validationMessage.length
+        },
+        validationMessage(state){
+            return state.listMessages.filter( p => {
+                return p.message
+            })
         }
     }
 }

@@ -15,7 +15,7 @@ export const messagesApi = {
     getPostFromUserById() {
         return instance.get("/todos/1")
 },
-    getAllMessages() {
+    getAllMessages(_limit) {
         return instance.get("/messages")
     }
 
