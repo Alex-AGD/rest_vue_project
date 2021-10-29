@@ -1,35 +1,34 @@
 <template>
   <div class="container">
     <header class="jumbotron">
-      <h3>{{ content }}</h3>
+      <Loader v-if="loadingFromBack"/>
+      <h3>{{ allData }}</h3>
     </header>
+    <hr/>
   </div>
 </template>
 
 <script>
-import UserService from "../services/user.service";
-
+import Loader from "@/assets/Loader";
+import {mapGetters, mapActions} from "vuex";
 export default {
   name: "Home",
   data() {
     return {
-      content: "",
-    };
+      loading: false,
+    }
+  },
+  components: {
+    Loader
   },
   mounted() {
-    UserService.getPublicContent().then(
-      (response) => {
-        this.content = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-      }
-    );
+    this.fetchAllFromBack()
   },
+  methods: mapActions(['fetchAllFromBack']),
+
+  computed: {
+    ...mapGetters(['loadingFromBack', 'allData'])
+  },
+
 };
 </script>

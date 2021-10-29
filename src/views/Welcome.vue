@@ -35,7 +35,7 @@ export default {
     MessageForm
   },
   mounted() {
-    //this.$store.dispatch ('allMessages')
+    this.$store.dispatch ('allMessages')
     this.fetchAllMessages(4)
   },
   methods: mapActions(['fetchAllMessages']),
