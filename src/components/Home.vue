@@ -12,7 +12,7 @@
 import Loader from "@/assets/Loader";
 import {mapGetters, mapActions} from "vuex";
 export default {
-  name: "Home",
+  name: "HomePage",
   data() {
     return {
       loading: false,
