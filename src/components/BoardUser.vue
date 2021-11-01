@@ -1,11 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="!err">
     <header class="jumbotron">
-      <ul class="list-group">
-        <Loader v-if="loading"/>
+      <Loader v-if="loading"/>
+      <ul class="list-group" >
         <li class="list-group-item"
-            v-for="(message, id) of content"
-            v-else-if="content.length" >
+            v-for="(message, id) of content">
           ID {{id + 1}}
           Сообщение: {{message.message }}
         </li>
@@ -13,6 +12,7 @@
     </header>
     <router-link to="/">Назад</router-link>
   </div>
+  <p v-else>{{err}}</p>
 </template>
 
 <script>
@@ -25,6 +25,7 @@ export default {
     return {
       content: "",
       loading: true,
+      err: ""
     };
   },
   components: {
@@ -37,17 +38,16 @@ export default {
         this.loading = false;
       },
       (error) => {
-        this.content =
+       this.err =
           (error.response &&
             error.response.data &&
             error.response.data.message) ||
           error.message ||
           error.toString();
+        console.log(this.content)
       }
     );
+
   },
 };
 </script>
-<style lang="scss">
-
-</style>

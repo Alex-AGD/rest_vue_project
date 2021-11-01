@@ -1,5 +1,8 @@
+
+
 <template>
   <div class="col-md-12">
+
     <div class="card card-container">
       <img
           id="profile-img"
@@ -39,15 +42,25 @@
       <div
           v-if="message"
           class="alert"
-          :class="successful ? 'alert-success' : 'alert-danger'"
-      >
+          :class="successful ? 'alert-success' : 'alert-danger'">
         {{ message }}
       </div>
+
+      <div class="social-login">
+        <a class="btn btn-block social-btn google" href={{GOOGLE_AUTH_URL}}>Log in with Google
+        <em class="fab fa-google-plus-square fa-2x"></em></a>
+      </div>
+      <div class="social-login">
+        <a class="btn btn-block social-btn google" href={GITHUB_AUTH_URL}>Log in with Github
+          <em class="fab fa-github fa-2x"></em></a>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
+import {GOOGLE_AUTH_URL} from "@/constants"
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default {
@@ -80,6 +93,7 @@ export default {
       loading: false,
       message: "",
       schema,
+      GOOGLE_AUTH_URL
     };
   },
   computed: {
@@ -120,6 +134,12 @@ export default {
 </script>
 
 <style scoped>
+.social-login a {
+  display: flex;
+  text-align: justify;
+  align-items: center;
+  justify-content: space-evenly;
+}
 label {
   display: block;
   margin-top: 10px;
