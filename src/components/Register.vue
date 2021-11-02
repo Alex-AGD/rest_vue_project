@@ -47,7 +47,8 @@
       </div>
 
       <div class="social-login">
-        <a class="btn btn-block social-btn google" href={{GOOGLE_AUTH_URL}}>Log in with Google
+        <a class="btn btn-block social-btn google"
+           @click.prevent="register">Log in with Google
         <em class="fab fa-google-plus-square fa-2x"></em></a>
       </div>
       <div class="social-login">
@@ -60,7 +61,6 @@
 </template>
 
 <script>
-import {GOOGLE_AUTH_URL} from "@/constants"
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default {
@@ -93,7 +93,6 @@ export default {
       loading: false,
       message: "",
       schema,
-      GOOGLE_AUTH_URL
     };
   },
   computed: {
@@ -129,6 +128,9 @@ export default {
           }
       );
     },
+    register(){
+      window.location.href = "http://localhost:8081/sessions/github/callback"
+    }
   },
 };
 </script>
