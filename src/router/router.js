@@ -9,7 +9,7 @@ const BoardAdmin = () => import("../components/BoardAdmin.vue")
 const BoardModerator = () => import("../components/BoardModerator.vue")
 const BoardUser = () => import("../components/BoardUser.vue")
 
-const routes = [
+export const routes = [
     {
         path: "/",
         name: "home",

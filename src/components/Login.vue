@@ -34,6 +34,15 @@
           </div>
         </div>
       </Form>
+      <div class="social-login">
+        <a class="btn btn-block social-btn google"
+           @click.prevent="loginGoogle">Log in with Google
+          <em class="fab fa-google-plus-square fa-2x"></em></a>
+      </div>
+      <div class="social-login">
+        <a class="btn btn-block social-btn google" href={GITHUB_AUTH_URL}>Log in with Github
+          <em class="fab fa-github fa-2x"></em></a>
+      </div>
     </div>
   </div>
 </template>
@@ -88,11 +97,21 @@ export default {
           }
       );
     },
+    loginGoogle(){
+      window.location.href = "http://localhost:8081/api/auth/google"
+    }
   },
 };
 </script>
 
 <style scoped>
+.social-login a {
+  display: flex;
+  text-align: justify;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 label {
   display: block;
   margin-top: 10px;

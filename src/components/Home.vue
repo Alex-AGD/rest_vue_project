@@ -3,7 +3,6 @@
     <header class="jumbotron">
       <Loader v-if="loadingFromBack"/>
       <h3>{{ allData }}</h3>
-      <font-awesome-icon icon="horse"/>
     </header>
     <hr/>
 
